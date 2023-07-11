@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <h1> Users Informations Is</h1>
+
+    {{!-- <form action = "/users/info64a8eaaeb781b740f8da6247" method ="get">
+    <input type="submit" value="Info Button">
+    </form> --}}
+
+    <button onclick="getinfo()"> Info Click</button>
+
+   <script>
+
+    function getinfo()
+    {
+        let url = "http://localhost:4000/users/info";
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF2YW5pQGdtIiwiaWQiOiI2NGFjZjdjMDRjMzVjYzU5MDU2MTU2ZmMiLCJpYXQiOjE2ODkwNTcyMTZ9.uw9-1EEC8J4mt7dOwcT7MO3gdUpWkxumZ5sfABogiTM"
+        fetch(url,{
+            method:"GET" , 
+            headers:{ 
+                "Authorization": "bearer "+token
+            }
+        })
+        .then(response=> {
+            if(response.ok)
+            {
+                console.log(response.json().then(json => console.log(json)))
+            }else{
+                console.log("api calling error")
+            }
+        })
+        .catch(err=>
+        {
+            console.log(err);
+        });
+        
+    }
+
+   </script>
+
+</body>
+</html>

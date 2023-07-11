@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+</head>
+<body>
+  <h1>Signup Form</h1>
+
+  <form id="signupForm">
+    <input type="text" name="username" placeholder="Enter Username">
+    <input type="email" name="email" placeholder="Enter Email">
+    <input type="password" name="password" placeholder="Enter Password">
+
+    <button type="button" onclick="signup()">Signup</button>
+  </form>
+
+   <a href ="http://localhost:4000/signin">If Already Have Account  </a>
+
+  <script>
+
+    function signup() {
+      const user = document.getElementById("signupForm");
+      const data = {
+        username: user.elements.username.value,
+        email: user.elements.email.value,
+        password: user.elements.password.value
+      };
+       console.log(data)
+      const url = "http://localhost:4000/users/signup"; 
+
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response=> {
+            if(response.ok)
+            {
+                console.log(response.json().then(json => console.log(json)))
+            }else{
+                console.log("api calling error")
+            }
+        })
+        .catch(err=>
+        {
+            console.log("error:",err);
+        });
+    }
+  </script>
+</body>
+</html>
