@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+
+</head>
+<body>
+    <form action = "/logIn" method ="post">
+        <h2>Home Page<h2>
+        <div class = "input-field">
+            <input type = "text" name="username" id = "username" placeholder = "Enter Username">
+        </div>
+        <div class = "input-field">
+            <input type="password" name="password" id=" password" placeholder="Enter Password">
+        </div>
+        <input type="submit" value="LogIn">
+    </form>
+</body>
+</html>
+
+////////////////////////////////////////////////
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {{!-- <script>
+        async function
+
+    </script> --}}
+
+</head>
+<body>
+    <h2>Sign Up Page</h2>
+
+     {{!-- <form action= "/users/signup" method ="post">
+    
+        <input type = "text" name="username"  placeholder = "Enter Username">
+        
+       <input type="password" name="password" placeholder="Enter Password">
+
+       <input type="email" name="email" placeholder="Enter Email">
+     
+     <input type="submit" value="Singup">
+
+    </form>
+
+    <a href ="http://localhost:4000/signin">If Already Have Account  </a>  --}}
+       
+       {{!-- <a href = "http://localhost:4000/signin">
+    
+       //<input type="submit" value="Singup">
+       </a> --}}
+    <div>
+        <input type = "text" name="username"  placeholder = "Enter Username">
+        
+       <input type="password" name="password" placeholder="Enter Password">
+
+       <input type="email" name="email" placeholder="Enter Email">
+
+       <button onclick="signup()">signup button</button>
+ 
+  
+    </div>
+
+    <script>
+        function signup()
+        {
+            window.open("http://localhost:4000/signin")
+        }
+     
+    </script>
+</body>
+
+
+</html>
+
+/////////////////////////////////////////////////
+// function signup()
+       // {
+       //     let url = "http://localhost:4000/users/signup";
+          //  let user = { "email": "ajay@gm","password": "111","username": "ajay"};
+
+         //   fetch(url,{
+        //        method :"POST",
+         //       body : JSON.stringify(user)
+         //   }).then(result=> result.json())
+         //   .then(json=> {
+         //       console.log(json);
+         //   })
+       //
+       // }/////////////////////////////////
+
+       ''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       <form id="signupForm">
+        <input type="email" name="email" placeholder="Enter Email">
+        <input type="password" name="password" placeholder="Enter Password">
+    
+        <button type="button" onclick="signin()">Signin</button>
+      </form>
+    
+      <script>
+        
+        function signin() {
+          const user = document.getElementById("signupForm");
+          const data = {
+            email: user.elements.email.value,
+            password: user.elements.password.value
+          };
+    
+          const url = "http://localhost:4000/users/signin"; 
+    
+          fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response=> {
+                if(response.ok)
+                {
+                    console.log(response.json().then(json => console.log(json)))
+                }else{
+                    console.log("api calling error")
+                }
+            })
+            .catch(err=>
+            {
+                console.log("error:",err);
+            });
+        }
+      </script>

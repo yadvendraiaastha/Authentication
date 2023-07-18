@@ -1,48 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+
 </head>
+
 <body>
     <h1> Users Informations Is</h1>
 
-    {{!-- <form action = "/users/info64a8eaaeb781b740f8da6247" method ="get">
-    <input type="submit" value="Info Button">
+    {{!-- <form action="/users/info64a8eaaeb781b740f8da6247" method="get">
+        <input type="submit" value="Info Button">
     </form> --}}
 
-    <button onclick="getinfo()"> Info Click</button>
+    <button onclick="getinfo(responsehandle)"> Info Click</button>
 
-   <script>
+    <script>
 
-    function getinfo()
-    {
-        let url = "http://localhost:4000/users/info";
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF2YW5pQGdtIiwiaWQiOiI2NGFjZjdjMDRjMzVjYzU5MDU2MTU2ZmMiLCJpYXQiOjE2ODkwNTcyMTZ9.uw9-1EEC8J4mt7dOwcT7MO3gdUpWkxumZ5sfABogiTM"
-        fetch(url,{
-            method:"GET" , 
-            headers:{ 
-                "Authorization": "bearer "+token
+        function getinfo(callback) {
+            let url = "http://localhost:4000/users/info"
+            //const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF2YW5pQGdtIiwiaWQiOiI2NGFjZjdjMDRjMzVjYzU5MDU2MTU2ZmMiLCJpYXQiOjE2ODkwNTcyMTZ9.uw9-1EEC8J4mt7dOwcT7MO3gdUpWkxumZ5sfABogiTM"
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": "bearer " + document.cookie.split("Token=")[1]
+                }
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        console.log("API Error")
+                    }
+                })
+
+                .then((json) => {
+                    callback(null, json)
+                })
+
+                .catch((err) => {
+                    callback(err, null);
+                });
+        }
+        function responsehandle(err, result) {
+            if (err) {
+                console.log("error", err)
+            } else {
+                console.log(result);
             }
-        })
-        .then(response=> {
-            if(response.ok)
-            {
-                console.log(response.json().then(json => console.log(json)))
-            }else{
-                console.log("api calling error")
-            }
-        })
-        .catch(err=>
-        {
-            console.log(err);
-        });
-        
-    }
+        }
 
-   </script>
+    </script>
 
 </body>
+
 </html>

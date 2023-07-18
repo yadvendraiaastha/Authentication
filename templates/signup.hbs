@@ -13,14 +13,14 @@
     <input type="email" name="email" placeholder="Enter Email">
     <input type="password" name="password" placeholder="Enter Password">
 
-    <button type="button" onclick="signup()">Signup</button>
+    <button type="button" onclick="signup(responsehandle)">Signup</button>
   </form>
 
    <a href ="http://localhost:4000/signin">If Already Have Account  </a>
 
   <script>
 
-    function signup() {
+    function signup(callback) {
       const user = document.getElementById("signupForm");
       const data = {
         username: user.elements.username.value,
@@ -37,18 +37,34 @@
         },
         body: JSON.stringify(data)
       })
-      .then(response=> {
+      .then((response) =>
+      {
             if(response.ok)
             {
-                console.log(response.json().then(json => console.log(json)))
+                return response.json();
             }else{
-                console.log("api calling error")
+                console.log("API Error")
             }
         })
-        .catch(err=>
+      
+        .then((json) => {
+            callback(null,json);
+         })
+
+        .catch((err)=>
         {
-            console.log("error:",err);
+            calllabck(err,null);
         });
+    }
+
+    function responsehandle(err,result)
+    {
+      if(err)
+      {
+        console.log("error",err)
+      }else{
+        console.log(result);
+      }
     }
   </script>
 </body>
